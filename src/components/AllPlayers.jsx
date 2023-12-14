@@ -1,16 +1,19 @@
-import { Link } from "react-router-dom"
+import { Link, Route, Routes } from "react-router-dom"
+import SinglePlayer from "./SinglePlayer"
 
 const AllPlayers = ({players}) => {
     return (
         <div>
             {players.map((player) => {
                 return (
-                    <li>
-                        <Link to={`/players/${player.id}`}>{player.name}</Link>
-                    </li>
+                    <Link key={player.id} to={`/players/${player.id}`}>
+                        <li>
+                        {player.name}
+                        </li>
+                    </Link>
                 )
-            })}
-        </div>
+            })}      
+        </div>      
     )
 }
 export default AllPlayers

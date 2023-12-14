@@ -1,46 +1,29 @@
-import { useParams } from "react-router-dom"
 import { useState } from "react"
 
-const SinglePlayer = ({players, deleteThing, updateThing}) => {
-    // access id when player is clicked
-    const params = useParams()
-    const id = params.id*1
+const NewPlayer = ({create}) => {
     const [name, setName] = useState('')
     const [breed, setBreed] = useState('')
     const [status, setStatus] = useState('')
     const [imageUrl, setImageurl] = useState('')
 
-    const findPlayer = players.find((player) => {
-        return id === player.id
-    })
-
-    if (!findPlayer){
-        return null
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault()
-        const updatedThing = {
-            id,
+        const newThing = {
             name,
-            breed,
+            breed, 
             status,
             imageUrl
         }
-        updateThing(updatedThing)
+        create(newThing)
+        setName('')
+        setBreed('')
+        setStatus('')
+        setImageurl('')
     }
 
     return (
         <div>
-            <h4>Name: {findPlayer.name}</h4>
-            <h4>Breed: {findPlayer.breed}</h4>
-            <h4>Image Url: {findPlayer.imageUrl}</h4>
-            <hr />
-            <h3>Click to delete item</h3>
-            <button >Delete</button>  
-            <hr />
-            <h3>Update Thing</h3>   
-
+            <h3>Create a New Player</h3>
             <form onSubmit={handleSubmit}>
                 <label>Name
                     <input 
@@ -71,8 +54,9 @@ const SinglePlayer = ({players, deleteThing, updateThing}) => {
                     />
                 </label>
                 <button type="submit">Submit</button>
-            </form>    
+            </form>
         </div>
     )
 }
-export default SinglePlayer
+
+export default NewPlayer
